@@ -1,5 +1,8 @@
 services:
   php:
+    networks:
+      test_network:
+        ipv4_address: ${PHP_IPV4_ADDRESS}
     image: ${IMAGES_PREFIX:-}app-php
     restart: unless-stopped
     environment:
@@ -31,13 +34,15 @@ services:
       - target: 443
         published: ${HTTP3_PORT:-443}
         protocol: udp
-
 # Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
 
 ###> doctrine/doctrine-bundle ###
   database:
+    networks:
+      test_network:
+        ipv4_address: ${DATABASE_IPV4_ADDRESS}
     image: postgres:${POSTGRES_VERSION:-16}-alpine
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-app}
@@ -64,3 +69,10 @@ volumes:
 ###> doctrine/doctrine-bundle ###
   database_data:
 ###< doctrine/doctrine-bundle ###
+
+networks:
+    test_network:
+        ipam:
+            driver: default
+            config:
+                - subnet: 1.0.0.0/24

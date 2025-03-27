@@ -8,10 +8,15 @@ PHP_CONT = $(DOCKER_COMP) exec php
 PHP      = $(PHP_CONT) php
 COMPOSER = $(PHP_CONT) composer
 SYMFONY  = $(PHP) bin/console
+PHP-CS-FIXER = $(PHP) vendor/bin/php-cs-fixer
+PHPSTAN = $(PHP) vendor/bin/phpstan
+PHPUNIT  = $(PHP) vendor/bin/phpunit
+PHPMD  = $(PHP) vendor/bin/phpmd
+NPM = npm
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        : help build up start down logs sh composer vendor sf cc test
+.PHONY        : help build up start down logs sh composer vendor sf cc test build-from-cache
 
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
@@ -20,6 +25,9 @@ help: ## Outputs this help screen
 ## —— Docker 🐳 ————————————————————————————————————————————————————————————————
 build: ## Builds the Docker images
 	@$(DOCKER_COMP) build --pull --no-cache
+
+build-from-cache: ## Builds the Docker images from cache
+	@$(DOCKER_COMP) build --pull
 
 up: ## Start the docker hub in detached mode (no logs)
 	@$(DOCKER_COMP) up --detach
@@ -59,3 +67,30 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 
 cc: c=c:c ## Clear the cache
 cc: sf
+
+## —— App 🧰 ———————————————————————————————————————————————————————————————
+.PHONY        : init-db tests php-cs-fixer php-cs-lint phpstan tests phpmd
+php-cs-fixer:
+	@$(PHP-CS-FIXER) fix -vvv
+
+php-cs-lint:
+	@$(PHP-CS-FIXER) fix --dry-run -vvv
+
+init-db:
+	@$(SYMFONY) doctrine:schema:drop --force
+	@$(SYMFONY) doctrine:schema:create
+	@$(SYMFONY) doctrine:schema:update
+	@$(SYMFONY) doctrine:fixtures:load --append
+
+phpstan:
+	@$(PHPSTAN)
+
+phpmd:
+	@$(PHPMD) ./src html ./phpmd.rulesets.xml --reportfile var/phpmd-report.html
+
+tests:
+	@$(SYMFONY) doctrine:schema:drop --force --full-database --env=test || true
+	@$(SYMFONY) doctrine:schema:create --env=test
+	@$(SYMFONY) doctrine:schema:update --complete --force --env=test
+	@$(SYMFONY) doctrine:fixtures:load --append --env=test
+	@$(PHPUNIT)

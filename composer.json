@@ -19,6 +19,7 @@
         "phpdocumentor/reflection-docblock": "^5.6",
         "phpstan/phpdoc-parser": "^2.1",
         "runtime/frankenphp-symfony": "^0.2.0",
+        "stof/doctrine-extensions-bundle": "*",
         "symfony/asset": "7.2.*",
         "symfony/console": "7.2.*",
         "symfony/dotenv": "7.2.*",
@@ -46,8 +47,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
-            "Inwebo\\DoctrineEventSourcing\\": "../doctrine-event-sourcing"
+            "App\\": "src/"
         }
     },
     "autoload-dev": {
@@ -91,6 +91,7 @@
         "dama/doctrine-test-bundle": "^8.3",
         "doctrine/doctrine-fixtures-bundle": "^4.1",
         "friendsofphp/php-cs-fixer": "^3.73",
+        "phpmd/phpmd": "^2.15",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^12.0",
         "symfony/maker-bundle": "^1.62"

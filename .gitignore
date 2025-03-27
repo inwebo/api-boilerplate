@@ -15,7 +15,7 @@
 ###< phpunit/phpunit ###
 
 ###> phpstan/phpstan ###
-phpstan.neon
+#phpstan.neon
 ###< phpstan/phpstan ###
 
 ###> friendsofphp/php-cs-fixer ###
@@ -24,6 +24,6 @@ phpstan.neon
 ###< friendsofphp/php-cs-fixer ###
 
 ###> inwebo/config ###
-.php-cs-fixer.dist.php
+#.php-cs-fixer.dist.php
 .idea
 ###< ###> inwebo/config ### ###
