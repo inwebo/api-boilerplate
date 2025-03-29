@@ -1,10 +1,9 @@
-# Domain mapping
 doctrine:
     orm:
         mappings:
-#            Foo:
-#                type: attribute
-#                is_bundle: false
-#                dir: '%kernel.project_dir%/src/Foo'
-#                prefix: 'App\Foo\Entity'
-#                alias: Foo
+            Shared:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Shared'
+                prefix: App\Shared\Entity
+                alias: Shared
