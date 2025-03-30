@@ -21,6 +21,8 @@ class DomainCommand extends Command
         private string $twigConfig,
         #[Autowire('%kernel.project_dir%/config/extra/doctrine-mappings.yaml')]
         private string $doctrineConfig,
+        #[Autowire('%kernel.project_dir%/config/packages/api_platform.yaml')]
+        private string $apiConfig,
         #[Autowire('%kernel.project_dir%/src')]
         private string $src,
     ) {
@@ -75,6 +77,15 @@ class DomainCommand extends Command
         $this->addArgument('domain', InputArgument::REQUIRED, 'Domain name to add: will create a new domain in src/ & configure twig & doctrine.');
     }
 
+    protected function addApiPlatformPaths(string $domain): array
+    {
+        return [
+            sprintf('%%kernel.project_dir%%/src/%s/Entity', $domain),
+            sprintf('%%kernel.project_dir%%/src/%s/Controller', $domain),
+            sprintf('%%kernel.project_dir%%/src/%s/ApiResource', $domain),
+        ];
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $filesystem = new Filesystem();
@@ -91,6 +102,14 @@ class DomainCommand extends Command
         $doctrineConfig = Yaml::parseFile($this->doctrineConfig);
         $doctrineConfig['doctrine']['orm']['mappings'][$input->getArgument('domain')] = $this->getDoctrineMapping($input->getArgument('domain'));
         file_put_contents($this->doctrineConfig, Yaml::dump($doctrineConfig, 100));
+
+        $apiConfig = Yaml::parseFile($this->apiConfig);
+        //$apiConfig['api_platform']['maping']['paths'] = $this->addApiPlatformPaths($input->getArgument('domain'));
+        foreach ($this->addApiPlatformPaths($input->getArgument('domain')) as $dir) {
+            $apiConfig['api_platform']['mapping']['paths'][] = $dir;
+        }
+
+        file_put_contents($this->apiConfig, Yaml::dump($apiConfig, 100));
 
         return Command::SUCCESS;
     }
