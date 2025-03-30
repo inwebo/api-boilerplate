@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64d0a49e0aee29e64f0ba0feb4690dae",
+    "content-hash": "445fe5efa6c0e91ab909230aba9be19c",
     "packages": [
         {
             "name": "api-platform/core",
@@ -1698,6 +1698,63 @@
                 }
             ],
             "time": "2025-02-24T22:12:57+00:00"
+        },
+        {
+            "name": "inwebo/doctrine-event-sourcing",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inwebo/doctrine-event-sourcing.git",
+                "reference": "4afa27329d12065d53e9cc3ac415583281efa264"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inwebo/doctrine-event-sourcing/zipball/4afa27329d12065d53e9cc3ac415583281efa264",
+                "reference": "4afa27329d12065d53e9cc3ac415583281efa264",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^3.3",
+                "php": "^8.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.72",
+                "phpmd/phpmd": "^2.15",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^12.0",
+                "symfony/event-dispatcher": "^7.2",
+                "symfony/test-pack": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Inwebo\\DoctrineEventSourcing\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Inwebo Veritas",
+                    "email": "github@inwebo.net",
+                    "homepage": "https://www.inwebo.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple Event sourcing pattern implementation with DoctrineListener",
+            "homepage": "https://github.com/inwebo/doctrine-event-sourcing",
+            "keywords": [
+                "doctrine",
+                "event sourcing",
+                "php8.3"
+            ],
+            "support": {
+                "issues": "https://github.com/inwebo/doctrine-event-sourcing/issues",
+                "source": "https://github.com/inwebo/doctrine-event-sourcing/tree/1.0.0"
+            },
+            "time": "2025-04-09T19:01:01+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -10457,7 +10514,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,

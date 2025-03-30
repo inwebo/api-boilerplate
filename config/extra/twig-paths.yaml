@@ -1,3 +1,4 @@
 twig:
     paths:
         src/Shared/templates: Shared
+        src/Person/templates: Person

@@ -74,6 +74,8 @@ cc: sf
 
 ## —— App 🧰 ———————————————————————————————————————————————————————————————
 .PHONY        : init-db tests php-cs-fixer php-cs-lint phpstan tests phpmd
+bootstrap: down build-from-cache up-dev init-db
+
 php-cs-fixer:
 	@$(PHP-CS-FIXER) fix -vvv
 
@@ -83,8 +85,8 @@ php-cs-lint:
 init-db:
 	@$(SYMFONY) doctrine:schema:drop --force
 	@$(SYMFONY) doctrine:schema:create
-	@$(SYMFONY) doctrine:schema:update
-	@$(SYMFONY) doctrine:fixtures:load --append
+	@$(SYMFONY) doctrine:schema:update  --force
+	@$(SYMFONY) doctrine:fixtures:load --append || true
 
 phpstan:
 	@$(PHPSTAN)

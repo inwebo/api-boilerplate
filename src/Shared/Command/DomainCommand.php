@@ -69,7 +69,7 @@ class DomainCommand extends Command
                 'Enum',
             ],
             'Repository' => [
-                'QueryBuilder'
+                'QueryBuilder',
             ],
             'Security',
             'Service',

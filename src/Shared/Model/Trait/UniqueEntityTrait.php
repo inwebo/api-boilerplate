@@ -11,11 +11,16 @@ use Symfony\Component\Uid\Uuid;
 
 trait UniqueEntityTrait
 {
-    #[ORM\Id, ORM\GeneratedValue(strategy: 'IDENTITY'), ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue(strategy: 'IDENTITY'), ORM\Column(type: 'integer', unique: true)]
     #[ApiProperty(identifier: false)]
     private ?int $id = null;
 
     #[ApiProperty(identifier: true)]
     #[ORM\Column(type: UuidType::NAME, unique: true)]
     private Uuid $uuid;
+
+    public function __construct()
+    {
+        $this->uuid = Uuid::v7();
+    }
 }

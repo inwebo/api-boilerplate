@@ -1,0 +1,37 @@
+resources:
+    App\Person\Entity\Person:
+        - operations:
+            ApiPlatform\Metadata\GetCollection:
+                method: GET
+                uriTemplate: /person
+                normalizationContext:
+                    groups: ['person:read']
+            ApiPlatform\Metadata\Get:
+                method: GET
+                uriTemplate: /person/{id}
+                normalizationContext:
+                    groups: ['person:read']
+            ApiPlatform\Metadata\Patch:
+                method: PATCH
+                uriTemplate: /person/{id}
+            ApiPlatform\Metadata\Post:
+                method: Post
+                uriTemplate: /person
+                denormalizationContext:
+                    groups: [ 'person:write' ]
+        - operations:
+              ApiPlatform\Metadata\Get:
+                method: GET
+                uriTemplate: /person/{id}/historic
+                controller: App\Person\Controller\HistoricController
+                normalizationContext:
+                    groups: [ 'person:read' ]
+    App\Person\Entity\PersonState:
+        operations:
+            ApiPlatform\Metadata\GetCollection:
+                method: GET
+                uriTemplate: /person/{id}/states
+                uriVariables:
+                    id:
+                        fromClass: App\Person\Entity\Person
+                        fromProperty: states
