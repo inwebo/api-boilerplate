@@ -16,7 +16,7 @@ NPM = npm
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        : help build up start down logs sh composer vendor sf cc test build-from-cache
+.PHONY        : help build up start down logs sh composer vendor sf cc test build-from-cache up-dev
 
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
@@ -32,15 +32,13 @@ build-from-cache: ## Builds the Docker images from cache
 up: ## Start the docker hub in detached mode (no logs)
 	@$(DOCKER_COMP) up --detach
 
-up-debug: ## Start the docker hub in detached mode (no logs)
+up-dev: ## Start the docker hub in detached mode (no logs)
 	XDEBUG_MODE=debug docker compose up --detach
 
 start: build up ## Build and start the containers
 
 down: ## Stop the docker hub
 	@$(DOCKER_COMP) down --remove-orphans
-
-tain: down build-from-cache up-debug
 
 logs: ## Show live logs
 	@$(DOCKER_COMP) logs --tail=0 --follow
