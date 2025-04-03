@@ -25,13 +25,15 @@ class DomainCommand extends Command
         private string $apiConfig,
         #[Autowire('%kernel.project_dir%/src')]
         private string $src,
+        #[Autowire('%kernel.project_dir%/')]
+        private string $kernel,
     ) {
         parent::__construct();
     }
 
     protected function getTemplatesRootDir(string $domain): string
     {
-        return sprintf('src/%s/templates', $domain);
+        return sprintf('src/%s/Templates', $domain);
     }
 
     protected function getDoctrineMapping(string $domain): array
@@ -50,20 +52,33 @@ class DomainCommand extends Command
         return [
             'ApiResource',
             'Command',
+            'Constraint',
             'Controller',
             'DataFixtures',
             'DependencyInjection',
             'Entity',
-            'Event',
+            'Event' => [
+                'Listener',
+                'Subscriber',
+            ],
             'Exception',
             'Form',
-            'Model',
-            'Repository',
+            'Model' => [
+                'Interface',
+                'Traits',
+                'Enum',
+            ],
+            'Repository' => [
+                'QueryBuilder'
+            ],
             'Security',
             'Service',
-            'Twig',
+            'Twig' => [
+                'Filter',
+                'Function',
+            ],
             'Utils',
-            'templates',
+            'Templates',
         ];
     }
 
@@ -91,8 +106,14 @@ class DomainCommand extends Command
         $filesystem = new Filesystem();
 
         $filesystem->mkdir($this->src.'/'.$input->getArgument('domain'));
-        foreach ($this->domainDirs() as $dir) {
-            $filesystem->mkdir($this->src.'/'.$input->getArgument('domain').'/'.$dir);
+        foreach ($this->domainDirs() as $key => $dir) {
+            if (is_array($dir)) {
+                foreach ($dir as $subDir) {
+                    $filesystem->mkdir($this->src.'/'.$input->getArgument('domain').'/'.$key.'/'.$subDir);
+                }
+            } else {
+                $filesystem->mkdir($this->src.'/'.$input->getArgument('domain').'/'.$dir);
+            }
         }
 
         $twigConfig = Yaml::parseFile($this->twigConfig);
@@ -107,8 +128,9 @@ class DomainCommand extends Command
         foreach ($this->addApiPlatformPaths($input->getArgument('domain')) as $dir) {
             $apiConfig['api_platform']['mapping']['paths'][] = $dir;
         }
-
         file_put_contents($this->apiConfig, Yaml::dump($apiConfig, 100));
+
+        $filesystem->mkdir($this->kernel.'/tests/'.$input->getArgument('domain'));
 
         return Command::SUCCESS;
     }
