@@ -104,7 +104,6 @@ class DomainCommand extends Command
         file_put_contents($this->doctrineConfig, Yaml::dump($doctrineConfig, 100));
 
         $apiConfig = Yaml::parseFile($this->apiConfig);
-        //$apiConfig['api_platform']['maping']['paths'] = $this->addApiPlatformPaths($input->getArgument('domain'));
         foreach ($this->addApiPlatformPaths($input->getArgument('domain')) as $dir) {
             $apiConfig['api_platform']['mapping']['paths'][] = $dir;
         }

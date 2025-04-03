@@ -12,6 +12,7 @@ PHP-CS-FIXER = $(PHP) vendor/bin/php-cs-fixer
 PHPSTAN = $(PHP) vendor/bin/phpstan
 PHPUNIT  = $(PHP) vendor/bin/phpunit
 PHPMD  = $(PHP) vendor/bin/phpmd
+RECTOR  = $(PHP) vendor/bin/rector
 NPM = npm
 
 # Misc
@@ -90,6 +91,9 @@ phpstan:
 
 phpmd:
 	@$(PHPMD) ./src html ./phpmd.rulesets.xml --reportfile var/phpmd-report.html
+
+rector:
+	@$(RECTOR)
 
 tests:
 	@$(SYMFONY) doctrine:schema:drop --force --full-database --env=test || true
