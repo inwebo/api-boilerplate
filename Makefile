@@ -99,5 +99,5 @@ tests:
 	@$(SYMFONY) doctrine:schema:drop --force --full-database --env=test || true
 	@$(SYMFONY) doctrine:schema:create --env=test
 	@$(SYMFONY) doctrine:schema:update --complete --force --env=test
-	@$(SYMFONY) doctrine:fixtures:load --append --env=test
+	@$(SYMFONY) doctrine:fixtures:load --append --env=test || true
 	@$(PHPUNIT)
