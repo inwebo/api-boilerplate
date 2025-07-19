@@ -65,7 +65,7 @@ class DomainCommand extends Command
             'Form',
             'Model' => [
                 'Interface',
-                'Traits',
+                'Trait',
                 'Enum',
             ],
             'Repository' => [
