@@ -13,3 +13,6 @@ api_platform:
             - '%kernel.project_dir%/src/Shared/Entity'
             - '%kernel.project_dir%/src/Shared/Controller'
             - '%kernel.project_dir%/src/Shared/ApiResource'
+            - '%kernel.project_dir%/src/User/Entity'
+            - '%kernel.project_dir%/src/User/Controller'
+            - '%kernel.project_dir%/src/User/ApiResource'
