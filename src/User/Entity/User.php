@@ -11,9 +11,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`inwebo__user`')]
+#[UniqueEntity('email')]
 class User extends AbstractEntity implements UserInterface
 {
     #[ORM\Id, ORM\GeneratedValue(strategy: 'IDENTITY'), ORM\Column]
@@ -22,6 +24,7 @@ class User extends AbstractEntity implements UserInterface
 
     #[ApiProperty(identifier: true)]
     #[ORM\Column(type: UuidType::NAME, unique: true)]
+    #[Groups(['user:basic'])]
     private Uuid $uuid;
 
     #[Assert\Email]
@@ -50,11 +53,26 @@ class User extends AbstractEntity implements UserInterface
         return (string) $this->uuid;
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function getRoles(): array
     {
-        return array_unique($this->roles);
+        return $this->roles;
     }
 
+    public function addRole(string $role): static
+    {
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param array<string> $roles
+     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -77,6 +95,26 @@ class User extends AbstractEntity implements UserInterface
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
     }
 
     public function __construct()

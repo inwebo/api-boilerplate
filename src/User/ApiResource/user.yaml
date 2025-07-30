@@ -1,2 +1,5 @@
 resources:
-    App\User\Entity\User: ~
+    App\User\Entity\User:
+        normalizationContext:
+            groups: ['user:basic']
+        
