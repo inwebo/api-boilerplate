@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use \ApiPlatform\Metadata\HttpOperation;
 
 return function (RoutingConfigurator $routes): void {
 //    $routes
@@ -13,4 +14,8 @@ return function (RoutingConfigurator $routes): void {
 //            'title' => 'Home',
 //            'parent' => null,
 //        ]]);
+    $routes
+        ->add('auth', '/v1/auth')
+        ->methods([HttpOperation::METHOD_POST])
+    ;
 };

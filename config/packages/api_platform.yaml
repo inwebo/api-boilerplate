@@ -16,3 +16,9 @@ api_platform:
             - '%kernel.project_dir%/src/User/Entity'
             - '%kernel.project_dir%/src/User/Controller'
             - '%kernel.project_dir%/src/User/ApiResource'
+    show_webby: false
+    swagger:
+        api_keys:
+            JWT:
+                name: Authorization
+                type: header

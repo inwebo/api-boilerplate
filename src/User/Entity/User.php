@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\User\Entity;
 
@@ -7,11 +9,11 @@ use App\Shared\Model\Doctrine\Entity\AbstractEntity;
 use App\User\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Types\UuidType;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Uid\Uuid;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`inwebo__user`')]
@@ -42,7 +44,7 @@ class User extends AbstractEntity implements UserInterface
     #[ORM\Column(nullable: false)]
     #[Assert\NotBlank]
     #[Assert\PasswordStrength([
-        'minScore' => Assert\PasswordStrength::STRENGTH_MEDIUM
+        'minScore' => Assert\PasswordStrength::STRENGTH_MEDIUM,
     ])]
     private string $password;
 
