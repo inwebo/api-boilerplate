@@ -101,3 +101,6 @@ tests:
 	@$(SYMFONY) doctrine:schema:update --complete --force --env=test
 	@$(SYMFONY) doctrine:fixtures:load --append --env=test || true
 	@$(PHPUNIT)
+
+composer-update:
+

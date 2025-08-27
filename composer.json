@@ -6,7 +6,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.3.19",
+        "php": ">=8.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/doctrine-orm": ">=4.1.19",
@@ -22,23 +22,23 @@
         "phpstan/phpdoc-parser": "^2.2",
         "runtime/frankenphp-symfony": "^0.2.0",
         "stof/doctrine-extensions-bundle": ">=1.14",
-        "symfony/asset": "7.2.*",
-        "symfony/console": "7.2.*",
-        "symfony/dotenv": "7.2.*",
-        "symfony/expression-language": "7.2.*",
+        "symfony/asset": "7.3.*",
+        "symfony/console": "7.3.*",
+        "symfony/dotenv": "7.3.*",
+        "symfony/expression-language": "7.3.*",
         "symfony/flex": "^2.8.1",
-        "symfony/framework-bundle": "7.2.*",
+        "symfony/framework-bundle": "7.3.*",
         "symfony/monolog-bundle": "^3.10",
-        "symfony/property-access": "7.2.*",
-        "symfony/property-info": "7.2.*",
-        "symfony/runtime": "7.2.*",
-        "symfony/security-bundle": "7.2.*",
-        "symfony/serializer": "7.2.*",
-        "symfony/twig-bundle": "7.2.*",
-        "symfony/uid": "7.2.*",
-        "symfony/validator": "7.2.*",
-        "symfony/workflow": "7.2.*",
-        "symfony/yaml": "7.2.*"
+        "symfony/property-access": "7.3.*",
+        "symfony/property-info": "7.3.*",
+        "symfony/runtime": "7.3.*",
+        "symfony/security-bundle": "7.3.*",
+        "symfony/serializer": "7.3.*",
+        "symfony/twig-bundle": "7.3.*",
+        "symfony/uid": "7.3.*",
+        "symfony/validator": "7.3.*",
+        "symfony/workflow": "7.3.*",
+        "symfony/yaml": "7.3.*"
     },
     "config": {
         "allow-plugins": {
@@ -101,7 +101,7 @@
         "phpunit/phpunit": "^12.2.7",
         "rector/rector": "^2.1.2",
         "symfony/maker-bundle": "^1.64",
-        "symfony/stopwatch": "7.2.*",
-        "symfony/web-profiler-bundle": "7.2.*"
+        "symfony/stopwatch": "7.3.*",
+        "symfony/web-profiler-bundle": "7.3.*"
     }
 }
