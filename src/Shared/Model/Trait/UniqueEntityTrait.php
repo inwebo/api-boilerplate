@@ -18,4 +18,14 @@ trait UniqueEntityTrait
     #[ApiProperty(identifier: true)]
     #[ORM\Column(type: UuidType::NAME, unique: true)]
     private Uuid $uuid;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUuid(): Uuid
+    {
+        return $this->uuid;
+    }
 }

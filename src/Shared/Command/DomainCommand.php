@@ -65,11 +65,11 @@ class DomainCommand extends Command
             'Form',
             'Model' => [
                 'Interface',
-                'Traits',
+                'Trait',
                 'Enum',
             ],
             'Repository' => [
-                'QueryBuilder'
+                'QueryBuilder',
             ],
             'Security',
             'Service',
@@ -110,9 +110,11 @@ class DomainCommand extends Command
             if (is_array($dir)) {
                 foreach ($dir as $subDir) {
                     $filesystem->mkdir($this->src.'/'.$input->getArgument('domain').'/'.$key.'/'.$subDir);
+                    fopen($this->src.'/'.$input->getArgument('domain').'/'.$key.'/'.$subDir.'/.gitkepp', 'w');
                 }
             } else {
                 $filesystem->mkdir($this->src.'/'.$input->getArgument('domain').'/'.$dir);
+                fopen($this->src.'/'.$input->getArgument('domain').'/'.$dir.'/.gitkeep', 'w');
             }
         }
 

@@ -7,3 +7,9 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Shared'
                 prefix: App\Shared\Entity
                 alias: Shared
+            User:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/User'
+                prefix: App\User\Entity
+                alias: User
