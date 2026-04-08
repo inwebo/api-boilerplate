@@ -70,6 +70,8 @@
         "symfony/polyfill-php82": "*"
     },
     "scripts": {
+        "php-cs-fixer": "vendor/bin/php-cs-fixer fix src --allow-risky=yes",
+        "php-stan": "vendor/bin/phpstan analyse -c phpstan.neon",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\User\State;
 
@@ -14,9 +16,8 @@ final readonly class UserPasswordHasher implements ProcessorInterface
 {
     public function __construct(
         private ProcessorInterface $processor,
-        private UserPasswordHasherInterface $passwordHasher
-    )
-    {
+        private UserPasswordHasherInterface $passwordHasher,
+    ) {
     }
 
     /**

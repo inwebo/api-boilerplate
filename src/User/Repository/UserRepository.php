@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\User\Repository;
 
@@ -6,9 +8,9 @@ use App\User\Entity\User;
 use App\User\Repository\QueryBuilder\UserQueryBuilder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -26,6 +28,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->select($alias)
             ->from(User::class, $alias, $indexBy);
     }
+
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof User) {
