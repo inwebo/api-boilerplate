@@ -84,7 +84,7 @@ init-db:
 	@$(SYMFONY) doctrine:schema:drop --force
 	@$(SYMFONY) doctrine:schema:create
 	@$(SYMFONY) doctrine:schema:update
-	@$(SYMFONY) doctrine:fixtures:load --append
+	#@$(SYMFONY) doctrine:fixtures:load --append
 
 phpstan:
 	@$(PHPSTAN)
@@ -103,4 +103,4 @@ tests:
 	@$(PHPUNIT)
 
 composer-update:
-
+	@$(COMPOSER) update
