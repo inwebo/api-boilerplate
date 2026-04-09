@@ -22,7 +22,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
-    public function createQueryBuilder($alias, $indexBy = null): UserQueryBuilder
+    public function createQueryBuilder(string $alias, ?string $indexBy = null): UserQueryBuilder
     {
         return (new UserQueryBuilder($this->getEntityManager()))
             ->select($alias)

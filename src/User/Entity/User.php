@@ -50,6 +50,11 @@ class User extends AbstractEntity implements UserInterface
 
     private ?string $plainPassword = null;
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function getUserIdentifier(): string
     {
         return (string) $this->uuid;
@@ -117,10 +122,5 @@ class User extends AbstractEntity implements UserInterface
     public function setPlainPassword(?string $plainPassword): void
     {
         $this->plainPassword = $plainPassword;
-    }
-
-    public function __construct()
-    {
-        parent::__construct();
     }
 }
