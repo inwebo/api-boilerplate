@@ -41,6 +41,7 @@ security:
         - { path: ^/v1/docs, roles: PUBLIC_ACCESS } # Allows accessing the Swagger UI docs
         - { path: ^/contexts, roles: PUBLIC_ACCESS } # Allows accessing the Swagger UI contexts
         - { path: ^/v1/auth, roles: PUBLIC_ACCESS }
+        - { path: ^/admin, roles: PUBLIC_ACCESS }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
